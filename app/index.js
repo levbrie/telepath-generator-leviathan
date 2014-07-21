@@ -5,6 +5,8 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 var leviathanLion = require('../leviathan_say/leviathan-lion');
+var buildPrompts = require('./prompts/buildPrompts');
+var clientPrompts = require('./prompts/clientPrompts');
 
 
 var LeviathanGenerator = yeoman.generators.Base.extend({
@@ -18,25 +20,18 @@ var LeviathanGenerator = yeoman.generators.Base.extend({
     });
   },
 
-  askFor: function () {
-    var done = this.async();
-
+  welcome: function() {
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the marvelous Leviathan generator!'));
-    this.log(leviathanLion('Welcome to the Leviathan.'));
+    this.log(leviathanLion('WELCOME TO THE LEVIATHAN'));
+  },
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+  buildPrompts: function () {
+    buildPrompts.prompt(this); // pass in generator to buildPrompts module
+  },
 
-    this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
-
-      done();
-    }.bind(this));
+  clientPrompts: function () {
+    clientPrompts.prompt(this);
   },
 
   app: function () {

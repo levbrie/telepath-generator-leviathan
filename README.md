@@ -9,10 +9,13 @@
 
 ### Recommended git workflow:
 (this should actually not apply since this generator should do it automatically)
-`$ hub init`
-`$ hub add . && hub commit -m "initial commit"`
-`$ hub create optional_org_name/repo_name -d "description of repo"`
-`$ hub push origin master`
+
+```zsh
+$ hub init
+$ hub add . && hub commit -m "initial commit"
+$ hub create optional_org_name/repo_name -d "description of repo"
+$ hub push origin master
+```
 
 ### This is Yeoman:
 
