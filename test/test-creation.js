@@ -2,6 +2,7 @@
 'use strict';
 var path = require('path');
 var helpers = require('yeoman-generator').test;
+var assert = require('yeoman-generator').assert;
 
 describe('leviathan generator', function () {
   beforeEach(function (done) {
@@ -10,9 +11,10 @@ describe('leviathan generator', function () {
         return done(err);
       }
 
-      this.app = helpers.createGenerator('leviathan:app', [
-        '../../app'
-      ]);
+      var name = 'leviathan:app',
+          dependencies = ['../../app'],
+          args = ['ApplicationName'];
+      this.app = helpers.createGenerator(name, dependencies, args);
       done();
     }.bind(this));
   });
@@ -32,6 +34,28 @@ describe('leviathan generator', function () {
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
       helpers.assertFile(expected);
+      done();
+    });
+  });
+
+  it('contains the app name in the README.md', function(done) {
+    helpers.mockPrompt(this.app, {
+      'someOption': true
+    });
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      // helpers.assertFile(expected);
+      assert.fileContent('README.md', /Application Name/);
+      done();
+    });
+  });
+
+  it('contains the app name in the README.md', function(done) {
+    helpers.mockPrompt(this.app, {});
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      // helpers.assertFile(expected);
+      assert.fileContent('package.json', /application-name/);
       done();
     });
   });

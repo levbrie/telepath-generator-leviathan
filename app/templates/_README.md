@@ -1,4 +1,4 @@
-## <%= _.humanize(app_name) %>
+## <%= _.titleize(_.humanize(app_name)) %>
 
 ###Built with
   * Angular
