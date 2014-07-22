@@ -34,12 +34,18 @@ var LeviathanGenerator = yeoman.generators.Base.extend({
     clientPrompts.prompt(this);
   },
 
-  app: function () {
-    this.mkdir('app');
-    this.mkdir('app/templates');
-
+  dirStructure: function () {
+    this.mkdir('server');
+    this.mkdir('client');
+    this.mkdir('client/app');
+    this.mkdir('client/stylesheets');
+    this.mkdir('test');
+    this.mkdir('grunt');
+    this.mkdir('dist');
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
+    this.log('hey hey hey');
+    this.log(this.config.get('generator-app'));
   },
 
   projectfiles: function () {
