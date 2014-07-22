@@ -8,6 +8,7 @@ module.exports = yeoman.generators.Base.extend({
   cleanup: function() {
     // get the files and folders in cwd
     var expanded = this.dest.expand('*');
+    this.log('\nCleaning up the following files and directories...');
     this.log(expanded);
 
     this.log('\nDELETING FILES AND FOLDERS IN CWD...');
@@ -17,6 +18,7 @@ module.exports = yeoman.generators.Base.extend({
       this.dest.delete(file);
     }.bind(this));
     // now get the dotfiles that remain in cwd
+    this.log('\nFinding dotfiles...');
     var dotfiles = this.dest.expand('.*');
     this.log(dotfiles);
     this.log('\nDELETING DOTFILES IN CWD...');

@@ -1,5 +1,11 @@
 {
-  "name": "package",
-  "version": "0.0.0",
-  "dependencies": {}
+  "name"         : "<%= _.slugify(_.humanize(app_name)) %>",
+  "version"      : "0.0.0",
+  "public"       : false,
+  "description"  : "Custom full-stack app for Leviathan Technology Inc.",
+  "repository"   : {
+    "type" : "git",
+    "url" : "http://github.com/leviathantech/<%= _.slugify(_.humanize(app_name)) %>.git"
+  },
+  "dependencies" : {}
 }
