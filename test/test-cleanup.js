@@ -10,7 +10,9 @@ describe('leviathan:cleanup', function () {
       if (err) {
         return done(err);
       }
-
+      this.app = helpers.createGenerator('leviathan:app', [
+        '../../app'
+      ]);
       this.cleanup = helpers.createGenerator('leviathan:cleanup', [
         '../../generators/cleanup'
       ]);
@@ -27,13 +29,15 @@ describe('leviathan:cleanup', function () {
       'package.json'
     ];
 
-    helpers.mockPrompt(this.cleanup, {
+    helpers.mockPrompt(this.app, {
       'someOption': true
     });
-    this.cleanup.options['skip-install'] = true;
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      assert.file(expected);
+    });
     this.cleanup.run({}, function () {
       assert.noFile(expected);
-      // helpers.assertFile(expected);
       done();
     });
   });
