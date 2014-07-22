@@ -44,8 +44,6 @@ var LeviathanGenerator = yeoman.generators.Base.extend({
     this.mkdir('dist');
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
-    this.log('hey hey hey');
-    this.log(this.config.get('generator-app'));
   },
 
   projectfiles: function () {
