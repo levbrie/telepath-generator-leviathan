@@ -10,9 +10,10 @@ describe('leviathan:cleanup', function () {
       if (err) {
         return done(err);
       }
-      this.app = helpers.createGenerator('leviathan:app', [
-        '../../app'
-      ]);
+      var name = 'leviathan:app',
+          dependencies = ['../../app'],
+          args = ['ApplicationName'];
+      this.app = helpers.createGenerator(name, dependencies, args);
       this.cleanup = helpers.createGenerator('leviathan:cleanup', [
         '../../generators/cleanup'
       ]);
@@ -34,6 +35,7 @@ describe('leviathan:cleanup', function () {
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
+      // helpers.assertFile(expected);
       assert.file(expected);
     });
     this.cleanup.run({}, function () {

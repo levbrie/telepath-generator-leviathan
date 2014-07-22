@@ -39,8 +39,8 @@ var LeviathanGenerator = yeoman.generators.Base.extend({
   },
 
   configuring: function () {
-    this.copy('editorconfig', '.editorconfig');
-    this.copy('jshintrc', '.jshintrc');
+    // this.copy('editorconfig', '.editorconfig');
+    // this.copy('jshintrc', '.jshintrc');
   },
 
   writing: function () {
@@ -53,7 +53,7 @@ var LeviathanGenerator = yeoman.generators.Base.extend({
     this.mkdir('dist');
 
     // copy
-    this.copy('_bower.json', 'bower.json');
+    // this.copy('_bower.json', 'bower.json');
 
     this.log('APP NAME:');
     this.log(this.appName);
@@ -61,10 +61,10 @@ var LeviathanGenerator = yeoman.generators.Base.extend({
     var context = {
         app_name: this.appName
     };
-    this.template('_package.json', 'package.json', context);
-    this.template('_README.md', 'README.md', context);
-    // this.sourceRoot(path.join(__dirname, './templates'));
-    // genUtils.processDirectory(this, '.', '.');
+    this.log(this.sourceRoot());
+    this.log(this.destinationRoot());
+    this._processDirectory(this.sourceRoot(), this.destinationRoot(), context);
+
   },
 
   install: function () {
@@ -75,5 +75,35 @@ var LeviathanGenerator = yeoman.generators.Base.extend({
 
 
 });
+
+LeviathanGenerator.prototype._processDirectory = function(source, destination, context) {
+    var root = this.isPathAbsolute(source) ? source : path.join(this.sourceRoot(), source);
+    var files = this.expandFiles('**', { dot: true, cwd: root });
+    this.log(files);
+    for (var i = 0; i < files.length; i++) {
+        var f = files[i];
+        var src = path.join(root, f);
+        var dest;
+        if(path.basename(f).indexOf('_') == 0){
+            dest = path.join(destination, path.dirname(f), path.basename(f).replace(/^_/, ''));
+            this.template(src, dest, context);
+            this.log('creating template from: ' + src);
+        }
+        else{
+          if(path.basename(f).indexOf('.') < 0) {
+            // it's a dotfile
+            this.log('\n\n CREATING DOTFILE');
+            f = '.' + f;
+            dest = path.join(destination, f);
+            this.log(dest);
+          } else {
+            dest = path.join(destination, f);
+          }
+          this.copy(src, dest);
+          this.log('creating copy from: ' + src);
+          this.log('creating copy to:   ' + dest);
+        }
+    }
+};
 
 module.exports = LeviathanGenerator;
