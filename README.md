@@ -2,7 +2,9 @@
 
 > [Yeoman](http://yeoman.io) generator
 
+[Yeoman](http://yeoman.io) generator that scaffolds out a full stack Javascript web app using [angularjs](https://angularjs.org/), Grunt and Bower, Node and Express, MongoDB and Redis.
 
+![](http://i.imgur.com/ucUfQQz.png)
 ## Getting Started
 
 ### Using this yeoman generator:
