@@ -12,7 +12,7 @@ var buildPrompts = {
     type    : 'list',
     name    : "stylesheet",
     default : 1,
-    message : "What would you like to write stylesheets with?",
+    message : "Please select a preprocessor, or CSS if you prefer not to use one:",
     choices : [ "CSS", "Sass", "Stylus", "Less"],
     filter : function( val ) { return val.toLowerCase(); }
   }],
