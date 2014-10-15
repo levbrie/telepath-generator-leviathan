@@ -46,7 +46,8 @@
     "word-wrap": "^0.1.2"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "grunt": "^0.4.5"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
