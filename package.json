@@ -1,9 +1,11 @@
 {
   "name": "generator-leviathan",
-  "version": "0.0.0",
-  "description": "Yeoman generator",
+  "version": "0.1.0",
+  "description": "Opinionated yeoman generator for creating mean stack applications",
   "license": "MIT",
   "main": "app/index.js",
+  "homepage": "https://github.com/leviathantech/generator-leviathan",
+  "bugs": "https://gihthub.com/leviathantech/generator-leviathan/issues",
   "repository": "levbrie/generator-leviathan",
   "author": {
     "name": "Lev Brie",
@@ -20,7 +22,15 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "angular",
+    "angularjs",
+    "express",
+    "mean",
+    "mongodb",
+    "mongo",
+    "framework",
+    "fullstack"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",
