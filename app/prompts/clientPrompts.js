@@ -41,10 +41,8 @@ var clientPrompts = {
     generator.log(yosay('Now choose your client-side options'));
     generator.prompt(prompts, function(properties) {
       generator.angularModules = properties.angularModules;
-      generator.stylesheet = properties.stylesheet;
       generator.log('client prompt responses');
       generator.log(generator.angularModules);
-      generator.log(generator.stylesheet);
       done();
     }.bind(generator));
   }

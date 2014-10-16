@@ -16,7 +16,9 @@
       this.argument('name', { type: String, required: false });
       this.appname = this.name || path.basename(process.cwd());
       this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
+      this.scriptAppName = this.appname;
       this.pkg = require('../package.json');
+      this.filters = {};
 
 
       // this.on('end', function () {
@@ -28,8 +30,10 @@
 
     welcome: function() {
       // Have Yeoman greet the user.
-      this.log(yosay('Welcome to the marvelous Leviathan generator!'));
+      // this.log(yosay('Welcome to the marvelous Leviathan generator!'));
       this.log(leviathanLion('WELCOME TO THE LEVIATHAN'));
+      this.log('This generator creates an an AngularJS app with ' +
+               ' an express server and a MongoDB data store.');
     },
 
     buildPrompts: function () {
@@ -40,6 +44,11 @@
       clientPrompts.prompt(this);
     },
 
+    saveSettings: function() {
+      this.config.set('filters', this.filters);
+      this.config.forceSave(); // make sure saving is done b4 calling hook
+    },
+
     configuring: function () {
       // this.copy('editorconfig', '.editorconfig');
       // this.copy('jshintrc', '.jshintrc');
@@ -47,15 +56,12 @@
 
     writing: function () {
       this.mkdir('server');
-      this.mkdir('client');
-      this.mkdir('client/app');
-      this.mkdir('client/stylesheets');
+      this.mkdir('public');
+      this.mkdir('public/app');
+      this.mkdir('public/stylesheets');
       this.mkdir('test');
       this.mkdir('grunt');
       this.mkdir('dist');
-
-      // copy
-      // this.copy('_bower.json', 'bower.json');
 
       this.log('APP NAME:');
       this.log(this.appname);

@@ -21,7 +21,9 @@ var buildPrompts = {
     var prompts = this.prompts;
     generator.prompt(prompts, function(properties) {
       generator.build = properties.build;
+      generator.filters[properties.build] = true;
       generator.stylesheet = properties.stylesheet;
+      generator.filters[properties.stylesheet] = true;
       generator.log('build prompt responses');
       generator.log(generator.build);
       generator.log(generator.stylesheet);

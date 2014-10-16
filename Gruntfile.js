@@ -18,7 +18,7 @@
       mochaTest: {
         test: {
           src: [
-            'test/spec/*.spec.js'
+            'test/spec/*.js'
           ],
           options: {
             reporter: 'spec',
