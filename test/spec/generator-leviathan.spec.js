@@ -50,42 +50,26 @@
             symlinkNodeDir = __dirname + '/../'  + TEMP_DIR_NAME + '/node_modules',
             symlinkBowerDir = __dirname + '/../'  + TEMP_DIR_NAME + '/public/bower_components';
 
-        console.log('\nDIR\n' + clientDir);
-
         fs.mkdirsSync(clientDir);
-        console.log('dir made');
-        // fs.mkdirSync(__dirname + '/../' + TEMP_DIR_NAME + '/' + CLIENT_DIR_NAME);
         fs.symlinkSync(nodeModulesFixturesDir, symlinkNodeDir);
-        console.log('SYMLINK 1');
         fs.symlinkSync(bowerComponentsFixturesDir, symlinkBowerDir);
-        console.log('SYMLINK 2');
-        // fs.ensureDir(dir, function(err) {
-        //   console.log('SOMETHING');
-        //   if (err) {
-        //     console.log('ERROR ENSURING DIR');
-        //     console.log(err);
-        //     done();
-        //   }
-        //   console.log('dir now exists');
-        //   done();
-        // });
       });
 
-      describe('with default options', function() {
-        beforeEach(function () {
-          helpers.mockPrompt(generator, defaultOptions);
-        });
+      // describe('with default options', function() {
+      //   beforeEach(function () {
+      //     helpers.mockPrompt(generator, defaultOptions);
+      //   });
 
-        it('should pass all client tests', function(done) {
-          this.timeout(60000);
-          generator.run({}, function() {
-            exec('grunt test:client', function(error, stdout, stderr) {
-              expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1\u001b[32m SUCCESS\u001b');
-              done();
-            });
-          });
-        });
-      });
+      //   it('should pass all client tests', function(done) {
+      //     this.timeout(60000);
+      //     generator.run({}, function() {
+      //       exec('grunt test:client', function(error, stdout, stderr) {
+      //         expect(stdout, 'Client tests failed \n' + stdout ).to.contain('Executed 1 of 1\u001b[32m SUCCESS\u001b');
+      //         done();
+      //       });
+      //     });
+      //   });
+      // });
 
     });
 
