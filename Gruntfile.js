@@ -14,10 +14,11 @@
       pkg          : grunt.file.readJSON('package.json'),
       env          : process.env,
       jshint       : require('./grunt/jshintTask'),
+      testApp      : { name: 'testAppName' },
       mochaTest: {
         test: {
           src: [
-            'test/spec/*.js'
+            'test/spec/*.spec.js'
           ],
           options: {
             reporter: 'spec',
@@ -32,15 +33,17 @@
 
     grunt.registerTask('updateFixtures', 'updates package and bower fixtures', function() {
       var done = this.async();
+      var appName = grunt.config('testApp.name');
+
       var packageJson = fs.readFileSync(path.resolve('app/templates/_package.json'), 'utf8');
       var bowerJson = fs.readFileSync(path.resolve('app/templates/_bower.json'), 'utf8');
 
       // replace package name
-      packageJson = packageJson.replace(/"name": "<%(.*)%>"/g, '"name": "tempApp"');
+      packageJson = packageJson.replace(/"name"(\s+): "<%(.*)%>"/g, '"name": "' + appName + '"');
       packageJson = packageJson.replace(/<%(.*)%>/g, '');
 
       // remove all ejs conditionals
-      bowerJson = bowerJson.replace(/"name": "<%(.*)%>"/g, '"name": "tempApp"');
+      bowerJson = bowerJson.replace(/"name": "<%(.*)%>"/g, '"name": "' + appName + '"');
       bowerJson = bowerJson.replace(/<%(.*)%>/g, '');
 
       // save files
@@ -57,11 +60,13 @@
 
       shell.cd('test/fixtures');
       grunt.log.ok('installing npm dependencies for generated app');
-      process.exec('npm install --quiet', {cwd: '../../fixtures'}, function (error, stdout, stderr) {
+      process.exec('bower install', {cwd: '../fixtures'}, function (error, stdout, stderr) {
+        process.exec('npm install --quiet', {cwd: '../fixtures'}, function (error, stdout, stderr) {
 
         grunt.log.ok('installing bower dependencies for generated app');
-        process.exec('bower install', {cwd: '../../fixtures'}, function (error, stdout, stderr) {
+
           shell.cd('../../');
+          grunt.log.ok('FINISHED INSTALLING BOWER DEP');
           done();
         })
       });

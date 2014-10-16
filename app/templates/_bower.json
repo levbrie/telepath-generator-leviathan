@@ -42,7 +42,7 @@
     "satellizer": "0.6.0",
     "ngDialog": "~0.2.13",
     "angular-toastr": "~0.4.0",
-    "bootstrap-sass-official": "~3.2.0+2"
+    "bootstrap-sass-official": "~3.2.0"
   },
   "dependencies": {
     "json3": "~3.3.2",
