@@ -46,9 +46,18 @@
     "word-wrap": "^0.1.2"
   },
   "devDependencies": {
-    "mocha": "*",
+    "chai": "^1.9.2",
+    "fs-extra": "^0.12.0",
     "grunt": "^0.4.5",
-    "jit-grunt": "^0.8.0"
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-mocha-test": "^0.12.1",
+    "jit-grunt": "^0.8.0",
+    "jshint-stylish": "^1.0.0",
+    "mocha": "*",
+    "shelljs": "^0.3.0",
+    "time-grunt": "^1.0.0"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"

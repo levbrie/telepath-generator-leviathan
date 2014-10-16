@@ -10,10 +10,10 @@ var buildPrompts = {
     filter  : function(val) { return val.toLowerCase(); }
   }, {
     type    : 'list',
-    name    : "stylesheet",
+    name    : 'stylesheet',
     default : 1,
-    message : "Please select a preprocessor, or CSS if you prefer not to use one:",
-    choices : [ "CSS", "Sass", "Stylus", "Less"],
+    message : 'Please select a preprocessor, or CSS if you prefer not to use one:',
+    choices : [ 'CSS', 'Sass', 'Stylus', 'Less'],
     filter : function( val ) { return val.toLowerCase(); }
   }],
   prompt: function(generator) {

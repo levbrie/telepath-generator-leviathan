@@ -2,3 +2,5 @@
 node_modules/
 temp/
 test/temp/
+test/temp2/
+test/fixtures/
