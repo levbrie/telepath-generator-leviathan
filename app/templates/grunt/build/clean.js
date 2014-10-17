@@ -7,9 +7,9 @@
         dot: true,
         src: [
           '.tmp',
-          '<%%= directories.dist %>/*',
-          '!<%%= directories.dist %>/.git*',
-          '!<%%= directories.dist %>/Procfile'
+          '<%= directories.dist %>/*',
+          '!<%= directories.dist %>/.git*',
+          '!<%= directories.dist %>/Procfile'
 
         ]
       }]

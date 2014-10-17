@@ -6,8 +6,8 @@
       files: [{
         expand: true,
         dot: true,
-        cwd: '<%%= directories.client %>',
-        dest: '<%%= directories.dist %>/public',
+        cwd: '<%= directories.client %>',
+        dest: '<%= directories.dist %>/public',
         src: [
           '*.{ico,png,txt}',
           '.htaccess',
@@ -19,11 +19,11 @@
       }, {
         expand: true,
         cwd: '.tmp/images',
-        dest: '<%%= directories.dist %>/public/assets/images',
+        dest: '<%= directories.dist %>/public/assets/images',
         src: ['generated/*']
       }, {
         expand: true,
-        dest: '<%%= directories.dist %>',
+        dest: '<%= directories.dist %>',
         src: [
           'package.json',
           'server.js',
@@ -33,7 +33,7 @@
     },
     styles: {
       expand: true,
-      cwd: '<%%= directories.client %>',
+      cwd: '<%= directories.client %>',
       dest: '.tmp/',
       src: ['{app,components}/**/*.css']
     }

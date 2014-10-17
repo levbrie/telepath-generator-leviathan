@@ -17,7 +17,7 @@
         },
         usemin: 'app/app.min.js'
       },
-      cwd: '<%%= directories.client %>/app',
+      cwd: '<%= directories.client %>/app',
       src: ['**/*.html'],
       dest: '.tmp/templates.js'
     }

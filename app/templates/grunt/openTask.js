@@ -5,6 +5,6 @@
       server: {
         url: 'http://localhost:' + expressPort
       }
-    }
+    };
   };
 }());

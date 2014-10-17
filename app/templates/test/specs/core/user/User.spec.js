@@ -1,6 +1,8 @@
+'use strict';
+
 describe('User', function() {
-  var PROFILE_IMAGE_URL = 'https://lh9.googleusercontent.com/-3485ajAAA/BBBBBBBBB/AAACDA-g/rand_sasdfjU/photo.jpg?sz=50'
-  var user;
+  var PROFILE_IMAGE_URL = 'https://lh9.googleusercontent.com/-3485ajAAA/BBBBBBBBB/AAACDA-g/rand_sasdfjU/photo.jpg?sz=50';
+  var User, user;
   beforeEach(module('app'));
 
   beforeEach(inject(function(_User_) {

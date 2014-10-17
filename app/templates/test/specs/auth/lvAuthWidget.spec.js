@@ -1,7 +1,13 @@
+'use strict';
+
 describe('Directive: Auth Widget lvAuthWidget', function() {
   var $rootScope, $controller, $q, $httpBackend, scope;
 
-  var element, mockAuthCtrl;
+  var $compile,
+      element,
+      mockAuthCtrl,
+      AuthCtrl;
+
   beforeEach(module('app'));
   beforeEach(module('/partials/core/auth/auth-widget.html'));
   // beforeEach(module(function($controllerProvider) {
@@ -51,7 +57,7 @@ describe('Directive: Auth Widget lvAuthWidget', function() {
   describe('when not authenticated', function() {
     beforeEach(function() {
       // scope.isAuthenticated = jasmine.createSpy('scopeSpy').and.returnValue(false);
-      scope.isAuthenticated = function() {return false; }
+      scope.isAuthenticated = function() {return false; };
       AuthCtrl = $controller('AuthCtrl', {$scope: scope});
       // spyOn(scope, 'isAuthenticated').and.returnValue(false);
       element = angular.element('<lv-auth-widget></lv-auth-widget>');

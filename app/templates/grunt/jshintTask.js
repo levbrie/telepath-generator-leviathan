@@ -6,8 +6,11 @@
       reporter: require('jshint-stylish')
     },
     all: [
-      'server.js', 'public/app/app.js', 'public/app/**/*.js',
-      'server/**/*.js'
+      'server.js', 'karma.conf.js', 'protractor.conf.js', 'modules.js',
+      'public/app/app.js', 'public/app/**/*.js',
+      'server/**/*.js',
+      'test/**/*.js',
+      'grunt/**/*.js'
     ],
     test: {
       options: {

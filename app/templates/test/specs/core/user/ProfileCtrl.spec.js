@@ -1,16 +1,24 @@
+'use strict';
+
 describe('Controller: ProfileCtrl', function() {
-  var AccountServiceSpy, profileCtrl, $scope, $httpBackend, $rootScope,
-      $controller;
+  var $scope,
+      $httpBackend,
+      $rootScope,
+      $controller,
+      AccountServiceSpy,
+      AccountService,
+      profileCtrl;
+
   var profile = {
-    _id: "somaadiopsfjaopsdjf",
-    displayName: "Bob Jones",
-    email: "bob.jones@example.com",
+    _id: 'somaadiopsfjaopsdjf',
+    displayName: 'Bob Jones',
+    email: 'bob.jones@example.com',
     emailVerified: false,
-    firstName: "Bob",
+    firstName: 'Bob',
     google: {},
-    lastName: "Jones",
-    provider: "google",
-    role: "user"
+    lastName: 'Jones',
+    provider: 'google',
+    role: 'user'
   };
 
   beforeEach(module('app'));

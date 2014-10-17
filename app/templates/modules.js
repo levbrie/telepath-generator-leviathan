@@ -20,7 +20,7 @@ var uploading = [
 
 var deployment = [
   'aws-sdk', 'codeclimate-test-reporter'
-]
+];
 
 // just grunt
 var grunt = [ 'grunt' ];
