@@ -12,3 +12,4 @@ tmpUploads/
 npm-debug.log
 info.md
 wip.md
+.DS_Store
