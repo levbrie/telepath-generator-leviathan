@@ -1,0 +1,33 @@
+<div>
+<ul ng-if="!isAuthenticated()" class="nav navbar-nav navbar-right">
+  <li><a href class="login" ng-click="displayLogin()">Login</a></li>
+  <li><a href>or</a></li>
+  <li><a href class="signup" ng-click="displaySignup()">Signup</a></li>
+
+</ul>
+
+<ul ng-if="isAuthenticated()" class="nav navbar-nav navbar-right">
+  <li on-toggle="toggled(open)" class="dropdown">
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object"
+             src="{{ identity.currentUser().google.picture }}"
+             alt="{{ identity.currentUser().displayName }}"
+             width="30"
+             height="30">
+      </a>
+      <div class="media-body">
+        <a href="href" class="dropdown-toggle"><span class="media-heading">{{identity.currentUser().displayName}}<b class="caret"></b></span></a>
+      </div>
+    </div>
+
+    <ul class="dropdown-menu">
+      <li ng-if="identity.currentUser.isAdmin()"><a href="/admin">Admin</a></li>
+      <li><a href="">Dashboard</a></li>
+      <li><a href="/account">Account</a></li>
+      <li><a href="">Messages</a></li>
+      <li><a href="" ng-click="logout()">Sign Out</a></li>
+    </ul>
+  </li>
+</ul>
+</div>
