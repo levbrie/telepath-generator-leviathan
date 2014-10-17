@@ -1,20 +1,46 @@
 (function () {
   'use strict';
-  var path = require('path');
-  var helpers = require('yeoman-generator').test;
-  var assert = require('yeoman-generator').assert;
 
-  describe('leviathan generator', function () {
+  var path            = require('path'),
+      fs              = require('fs-extra'),
+      helpers         = require('yeoman-generator').test,
+      assert          = require('yeoman-generator').assert,
+      chai            = require('chai'),
+      expect          = chai.expect,
+      exec            = require('child_process').exec,
+      CLIENT_DIR_NAME = 'public',
+      TEMP_DIR_NAME   = 'temp',
+      ASYNC_TIMEOUT   = 20000;
+
+  describe('leviathan generator creation', function () {
+    var generator;
+    var defaultOptions = {
+      build: 'grunt',
+      stylesheet: 'sass',
+      angularModules: [
+        'angular-animate',
+        'angular-resource',
+        'angular-cookies',
+        'angular-mocks',
+        'angular-sanitize'
+      ]
+    };
+
     beforeEach(function (done) {
-      helpers.testDirectory(path.join(__dirname, '../temp'), function (err) {
+      var name = 'leviathan:app',
+          dependencies = ['../../app'],
+          args = ['ApplicationName'];
+      helpers.testDirectory(path.join(__dirname, '../' + TEMP_DIR_NAME), function (err) {
+        console.log('\n\nTESTDIR CALLED\n\n');
         if (err) {
+          console.log(err);
           return done(err);
         }
 
-        var name = 'leviathan:app',
-            dependencies = ['../../app'],
-            args = ['ApplicationName'];
-        this.app = helpers.createGenerator(name, dependencies, args);
+        console.log('NO ERROR');
+
+        generator = helpers.createGenerator(name, dependencies, args);
+        generator.options['skip-install'] = true; // install should be loaded in fixtures
         done();
       }.bind(this));
     });
@@ -28,31 +54,27 @@
         'package.json'
       ];
 
-      helpers.mockPrompt(this.app, {
-        'someOption': true
-      });
-      this.app.options['skip-install'] = true;
-      this.app.run({}, function () {
+      helpers.mockPrompt(generator, defaultOptions);
+      generator.options['skip-install'] = true;
+      generator.run({}, function () {
         helpers.assertFile(expected);
         done();
       });
     });
 
     it('contains the app name in the README.md', function(done) {
-      helpers.mockPrompt(this.app, {
-        'someOption': true
-      });
-      this.app.options['skip-install'] = true;
-      this.app.run({}, function () {
+      helpers.mockPrompt(generator, defaultOptions);
+      generator.options['skip-install'] = true;
+      generator.run({}, function () {
         assert.fileContent('README.md', /Application Name/);
         done();
       });
     });
 
     it('contains the app name in the README.md', function(done) {
-      helpers.mockPrompt(this.app, {});
-      this.app.options['skip-install'] = true;
-      this.app.run({}, function () {
+      helpers.mockPrompt(generator, defaultOptions);
+      generator.options['skip-install'] = true;
+      generator.run({}, function () {
         assert.fileContent('package.json', /application-name/);
         done();
       });

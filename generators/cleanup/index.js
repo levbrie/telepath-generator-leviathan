@@ -1,6 +1,7 @@
 (function () {
   'use strict';
   var yeoman = require('yeoman-generator');
+      // process = require('child_process');
 
   module.exports = yeoman.generators.Base.extend({
     init: function() {
@@ -13,6 +14,7 @@
       this.log('\nCleaning up the following files and directories...');
       this.log(expanded);
 
+      this.log(process.cwd());
       this.log('\nDELETING FILES AND FOLDERS IN CWD...');
 
       expanded.forEach(function(file) {
