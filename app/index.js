@@ -10,7 +10,7 @@
       buildPrompts            = require('./prompts/buildPrompts'),
       clientPrompts           = require('./prompts/clientPrompts'),
       externalServicesPrompts = require('./prompts/externalServicesPrompts'),
-      secretGenerator         = require('../utils/secretGenerator');
+      keyGenerator         = require('../utils/keyGenerator');
 
 
   var LeviathanGenerator = yeoman.generators.Base.extend({
@@ -19,8 +19,8 @@
       this.appname = this.name || path.basename(process.cwd());
       this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
       this.scriptAppName = this.appname;
-      this.appSecret = secretGenerator.appSecret();
-      this.tokenSecret = secretGenerator.tokenSecret();
+      this.appSecret = keyGenerator.appSecret();
+      this.tokenSecret = keyGenerator.tokenSecret();
       this.log('APP_SECRET: ' + this.appSecret);
       this.log('TOKEN_SECRET: ' + this.tokenSecret);
       this.pkg = require('../package.json');
