@@ -1,14 +1,16 @@
 (function () {
   'use strict';
 
-  var path = require('path'),
-      yeoman = require('yeoman-generator'),
-      yosay = require('yosay'),
+  var path                    = require('path'),
+      yeoman                  = require('yeoman-generator'),
+      yosay                   = require('yosay'),
       // util = require('util'),
       // chalk = require('chalk'),
-      leviathanLion = require('../leviathan_say/leviathan-lion'),
-      buildPrompts = require('./prompts/buildPrompts'),
-      clientPrompts = require('./prompts/clientPrompts');
+      leviathanLion           = require('../leviathan_say/leviathan-lion'),
+      buildPrompts            = require('./prompts/buildPrompts'),
+      clientPrompts           = require('./prompts/clientPrompts'),
+      externalServicesPrompts = require('./prompts/externalServicesPrompts'),
+      secretGenerator         = require('../utils/secretGenerator');
 
 
   var LeviathanGenerator = yeoman.generators.Base.extend({
@@ -17,6 +19,10 @@
       this.appname = this.name || path.basename(process.cwd());
       this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
       this.scriptAppName = this.appname;
+      this.appSecret = secretGenerator.appSecret();
+      this.tokenSecret = secretGenerator.tokenSecret();
+      this.log('APP_SECRET: ' + this.appSecret);
+      this.log('TOKEN_SECRET: ' + this.tokenSecret);
       this.pkg = require('../package.json');
       this.filters = {};
 
@@ -42,6 +48,10 @@
 
     clientPrompts: function () {
       clientPrompts.prompt(this);
+    },
+
+    externalServicesPrompts: function () {
+      externalServicesPrompts.prompt(this);
     },
 
     saveSettings: function() {
@@ -72,7 +82,6 @@
       this.log(this.sourceRoot());
       this.log(this.destinationRoot());
       this._processDirectory(this.sourceRoot(), this.destinationRoot(), context);
-
     },
 
     install: function () {
@@ -94,7 +103,7 @@
           var dest;
           if(path.basename(f).indexOf('_') === 0){
               dest = path.join(destination, path.dirname(f), path.basename(f).replace(/^_/, ''));
-              this.template(src, dest, context);
+              this.template(src, dest);
               this.log('creating template from: ' + src);
           }
           else{

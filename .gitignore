@@ -4,3 +4,5 @@ temp/
 test/temp/
 test/fixtures/
 npm-debug.log
+.sublime-project
+.DS_Store
