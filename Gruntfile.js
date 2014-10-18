@@ -19,9 +19,9 @@
         test: {
           src: [
             'test/spec/*.spec.js',
-            // 'test/spec/test-creation.js',
-            // 'test/spec/test-load.js',
-            // 'test/spec/test-cleanup.js'
+            'test/spec/test-creation.js',
+            'test/spec/test-load.js',
+            'test/spec/test-cleanup.js'
           ],
           options: {
             reporter: 'spec',
@@ -76,12 +76,15 @@
     });
 
     // "npm test" runs these tasks
-    grunt.registerTask('test', [
-      'jshint',
-      'updateFixtures',
-      'installFixtures',
-      'mochaTest'
-    ]);
+    grunt.registerTask('test', function(target) {
+      if (target === 'build') {
+        return grunt.task.run([
+          // update and/or install fixtures
+          'jshint', 'updateFixtures', 'installFixtures', 'mochaTest'
+        ]);
+      }
+      grunt.task.run(['jshint', 'mochaTest']);
+    });
 
     grunt.registerTask('default', function() {
       grunt.log.writeln('Grunt Author: ' + grunt.config.get('pkg.author'))
