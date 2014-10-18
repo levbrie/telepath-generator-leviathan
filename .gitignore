@@ -5,4 +5,18 @@ test/temp/
 test/fixtures/
 npm-debug.log
 .sublime-project
+
+
+# ignore Vim and Emacs swap files, and apple .DS_Store
+*.swp
+*~
+.project
 .DS_Store
+.idea
+
+# ignore redis snapshots
+dump.rdb
+*.rdb
+
+# Ignore all logfiles and tempfiles.
+*.log

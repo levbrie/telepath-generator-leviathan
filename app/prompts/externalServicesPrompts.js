@@ -4,7 +4,7 @@ var externalServicesPrompts = {
 
   prompts: [{ // default type is 'input'
     name     : 'mongoLabURL',
-    message  : 'What is the name of your project?',
+    message  : 'Please enter your MongoLab URL',
     default  : 'mongodb://user:pass@somekey.mongolab.com:somenumber/some-app',
   }, {
     name     : 'awsAPIKey',

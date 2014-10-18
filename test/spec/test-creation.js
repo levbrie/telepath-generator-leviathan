@@ -62,6 +62,16 @@
       });
     });
 
+    // it('runs the compass task and creates a style.css file', function(done) {
+    //   var expected = ['public/stylesheets/css/style.css'];
+    //   helpers.mockPrompt(generator, defaultOptions);
+    //   generator.options['skip-install'] = true;
+    //   generator.run({}, function() {
+    //     helpers.assertFile(expected);
+    //     done();
+    //   });
+    // });
+
     it('contains the app name in the README.md', function(done) {
       helpers.mockPrompt(generator, defaultOptions);
       generator.options['skip-install'] = true;
@@ -71,7 +81,7 @@
       });
     });
 
-    it('contains the app name in the README.md', function(done) {
+    it('contains the app name in the package.json', function(done) {
       helpers.mockPrompt(generator, defaultOptions);
       generator.options['skip-install'] = true;
       generator.run({}, function () {

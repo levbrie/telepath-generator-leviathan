@@ -10,7 +10,7 @@
       buildPrompts            = require('./prompts/buildPrompts'),
       clientPrompts           = require('./prompts/clientPrompts'),
       externalServicesPrompts = require('./prompts/externalServicesPrompts'),
-      keyGenerator         = require('../utils/keyGenerator');
+      keyGenerator            = require('../utils/keyGenerator');
 
 
   var LeviathanGenerator = yeoman.generators.Base.extend({
@@ -76,24 +76,92 @@
       this.log('APP NAME:');
       this.log(this.appname);
       // templates
-      var context = {
-          appname: this.appname
-      };
+      // var context = {
+      //     appname: this.appname
+      // };
       this.log(this.sourceRoot());
       this.log(this.destinationRoot());
-      this._processDirectory(this.sourceRoot(), this.destinationRoot(), context);
+      this._processDirectory(this.sourceRoot(), this.destinationRoot());
     },
 
-    install: function () {
-      this.installDependencies({
-        skipInstall: this.options['skip-install']
-      });
-    }
+    // install: function () {
+    //   this.installDependencies({
+    //     skipInstall: this.options['skip-install']
+    //   });
 
+    //   this.on('end', function() {
+    //     this.spawnCommand('grunt', ['compass']);
+    //   });
+    // }
+    install: function() {
+      this.on('end', function () {
+        this.installDependencies({
+          skipInstall: this.options['skip-install'],
+          callback: function() {
+            // Emit a new event - dependencies installed
+            this.emit('dependenciesInstalled');
+          }.bind(this)
+        });
+      });
+
+      // Now you can bind to the dependencies installed event
+      this.on('dependenciesInstalled', function() {
+        this.spawnCommand('grunt', ['compass'], this._gruntFailedCallback)
+          .on('error', this._gruntFailedCallback)
+          .on('exit', this.emit.bind(this, 'gruntCompassComplete')); // generate style.css
+      });
+
+      this.on('gruntCompassComplete', function() {
+        // this.spawnCommand('git', ['init'])
+        //   .on('exit', this.emit.bind(this, 'gitInitComplete'));
+        this.spawnCommand('hub', ['init'])
+          .on('exit', this.emit.bind(this, 'initComplete'));
+      });
+
+      //  hub init
+      // $ hub add . && hub commit -m "initial commit"
+      // $ hub create optional_org_name/repo_name -d "description of repo"
+      // $ hub push origin master
+
+      this.on('initComplete', function() {
+        this.spawnCommand('hub', ['add', '.'])
+          .on('exit', this.emit.bind(this, 'hubAddComplete'));
+      });
+
+      this.on('hubAddComplete', function() {
+        this.spawnCommand('hub', ['commit', '-m', 'initial commit'])
+          .on('exit', this.emit.bind(this, 'hubCommitComplete'));
+      });
+
+      this.on('hubCommitComplete', function() {
+        this.spawnCommand('hub', ['create', '-d', 'Fullstack application using MEAN.'])
+          .on('exit', this.emit.bind(this, 'hubCreateComplete'));
+      });
+
+      this.on('hubCreateComplete', function() {
+        this.spawnCommand('hub', ['push', 'origin', 'master']);
+      });
+      // this.on('gitInitComplete', )
+
+      // this.spawnCommand(installer, args, cb)
+      //   .on('error', cb)
+      //   .on('exit', this.emit.bind(this, installer + 'Install:end', paths))
+      //   .on('exit', function (err) {
+      //     if (err === 127) {
+      //       this.log.error('Could not find ' + installer + '. Please install with ' +
+      //                           '`npm install -g ' + installer + '`.');
+      //     }
+      //     cb(err);
+      //   }.bind(this));
+    },
+
+    _gruntFailedCallback: function() {
+      this.log('GRUNT COMPASS TASK FAILED');
+    }
 
   });
 
-  LeviathanGenerator.prototype._processDirectory = function(source, destination, context) {
+  LeviathanGenerator.prototype._processDirectory = function(source, destination) {
       var root = this.isPathAbsolute(source) ? source : path.join(this.sourceRoot(), source);
       var files = this.expandFiles('**', { dot: true, cwd: root });
       this.log(files);
