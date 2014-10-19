@@ -13,7 +13,7 @@
     },
     production: {
       rootPath: rootPath,
-      db: process.env.MONGOLAB_URL,
+      db: process.env.MONGOLAB_URI,
       port: process.env.PORT || 80
     }
   };

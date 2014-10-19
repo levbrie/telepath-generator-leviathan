@@ -30,6 +30,12 @@
           'server.js',
           'server/**/*'
         ]
+      }, {
+        src: 'distgitignore',
+        dest: '<%= directories.dist %>/.gitignore'
+      }, {
+        src: '.env',
+        dest: '<%= directories.dist %>/.env'
       }]
     },
     styles: {

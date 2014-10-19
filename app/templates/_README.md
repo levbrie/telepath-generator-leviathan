@@ -286,7 +286,7 @@ Additional info can be found here:
 
 Create a Procfile with ```web: node server.js```
 Set the config vars for heroku with ```$ heroku config:set ENV_VAR=env_var_value```
-(this should include everything in .env -> APP_SECRET, TOKEN_SECRET, MONGOLAB_URL, etc.)
+(this should include everything in .env -> APP_SECRET, TOKEN_SECRET, MONGOLAB_URI, etc.)
 
 ## DEVELOPMENT PROCESS
 

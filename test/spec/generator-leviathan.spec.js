@@ -23,7 +23,6 @@
         'angular-mocks',
         'angular-sanitize'
       ],
-      mongoLabURL: 'mongodb://user:pass@aj042797.mongolab.com:13358/mean-scaffold',
       awsAPIKey: 'A5JHDNEI846HFNF',
       awsSecret: 'pioansd495hDJHf94nad8',
       s3BucketName: 'leviathan-app-uploads',

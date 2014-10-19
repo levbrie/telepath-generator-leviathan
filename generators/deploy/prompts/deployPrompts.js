@@ -18,6 +18,11 @@
     }, {
       name: 'herokuAppName',
       message: 'Name to use for heroku deployment (leave blank for a randomly generated name)'
+    }, {
+      type: 'confirm',
+      name: 'useMongoLabAddOn',
+      message: 'Do you wish to use the heroku mongolab addon to add mongo directly to heroku?',
+      default: true
     }],
     prompt: function(generator) {
       var done = generator.async();
@@ -28,6 +33,7 @@
         generator.repoName = generator._.slugify(deployResponses.repoName) || generator._.slugify(generator.appname);
         generator.makePrivate = deployResponses.makePrivate;
         generator.herokuAppName = generator._.slugify(deployResponses.herokuAppName);
+        generator.useMongoLabAddOn = deployResponses.useMongoLabAddOn;
 
         done();
       }.bind(generator));

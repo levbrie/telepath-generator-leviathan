@@ -3,10 +3,6 @@
 var externalServicesPrompts = {
 
   prompts: [{ // default type is 'input'
-    name     : 'mongoLabURL',
-    message  : 'Please enter your MongoLab URL',
-    default  : 'mongodb://user:pass@somekey.mongolab.com:somenumber/some-app',
-  }, {
     name     : 'awsAPIKey',
     message  : 'Please enter your AWS API Key:',
     default  : 'ENTER_AWS_KEY'
@@ -36,7 +32,6 @@ var externalServicesPrompts = {
     var prompts = this.prompts;
     generator.prompt(prompts, function(responses) {
 
-      generator.mongoLabURL    = responses.mongoLabURL;
       generator.mandrillAPIKey = responses.mandrillAPIKey;
       generator.awsAPIKey      = responses.awsAPIKey;
       generator.awsSecret      = responses.awsSecret;
@@ -45,7 +40,6 @@ var externalServicesPrompts = {
       generator.adminLogin     = responses.adminLogin;
       generator.adminPassword  = responses.adminPassword;
 
-      generator.log('mongoLabURL ' + generator.mongoLabURL);
       generator.log('mandrillAPIKey ' + generator.mandrillAPIKey);
       generator.log('awsAPIKey ' + generator.awsAPIKey);
       generator.log('awsSecret ' + generator.awsSecret);

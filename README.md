@@ -56,3 +56,11 @@ The deploy generator also uses a plugin called heroku-config to push your local 
 ```zsh
 $ heroku plugins:install git://github.com/ddollar/heroku-config.git
 ```
+
+Deployment requires that you have a remote mongo database to connect to.  You can use heroku addons to create one:
+
+```zsh
+ heroku addons:add mongolab
+```
+
+or you can [setup a mongolab account] and create one online. If you do this, just make sure to set the MONGOLAB_URI on heroku to the URI for accessing that db.

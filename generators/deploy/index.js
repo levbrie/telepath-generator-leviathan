@@ -57,18 +57,6 @@
     }.bind(this));
   };
 
-  // DeployGenerator.prototype.gitInit = function gitInit() {
-  //   var done = this.async();
-
-  //   this.log(chalk.bold('\nInitializing deployment repo'));
-  //   this.mkdir('dist');
-  //   var child = exec('git init', function (err, stdout, stderr) {
-  //     if (err) { done(err); }
-  //     done();
-  //   }.bind(this));
-  //   child.stdout.on('data', function(data) { console.log(data.toString()); });
-  // };
-
   DeployGenerator.prototype.setupGithubRepo = function setupGithubRepo() {
     if (this.abort) { return; }
     var done = this.async();
@@ -124,7 +112,7 @@
   };
 
   DeployGenerator.prototype.herokuCreate = function herokuCreate() {
-    if(this.abort) { return; }
+    if (this.abort) { return; }
     var done = this.async();
     // var regionParams = (this.region !== 'us') ? ' --region ' + this.region : '';
     var regionParams = '';
@@ -150,7 +138,7 @@
   };
 
   DeployGenerator.prototype.copyProcfile = function copyProcfile() {
-    if(this.abort) { return; }
+    if (this.abort) { return; }
     var done = this.async();
     this.log(chalk.bold('Creating Procfile'));
     this.copy('Procfile', 'dist/Procfile');
@@ -160,7 +148,7 @@
   };
 
   DeployGenerator.prototype.gruntBuild = function gruntBuild() {
-    if(this.abort) { return; }
+    if (this.abort) { return; }
     var done = this.async();
 
     this.log(chalk.bold('\nBuilding dist folder, please wait...'));
@@ -173,7 +161,7 @@
   };
 
   DeployGenerator.prototype.gitCommit = function gitInit() {
-    if(this.abort) { return; }
+    if (this.abort) { return; }
     var done = this.async();
 
     this.log(chalk.bold('Adding files for initial commit'));
@@ -193,8 +181,49 @@
     }.bind(this));
   };
 
+  DeployGenerator.prototype.syncConfigVars = function syncConfigVars() {
+    if (this.abort) { return; }
+    var done = this.async();
+
+    this.log(chalk.bold.cyan('Pushing local config vars to heroku'));
+    var child = exec('heroku config:push', { cwd: 'dist' }, function (err, stdout, stderr) {
+      if (err) {
+        this.log(chalk.bold.red('You may need to install heroku-config plugin:'));
+        this.log(chalk.bold.red('$ heroku plugins:install git://github.com/ddollar/heroku-config.git'));
+        this.log.error(err);
+      }
+      done();
+    }.bind(this));
+    child.stderr.on('data', function (data) {
+      this.log('Failed to start child process.');
+    });
+    child.stdout.on('data', function(data) {
+      this.log(data.toString());
+    }.bind(this));
+  };
+
+  DeployGenerator.prototype.addOnForMongoLab = function addOnForMongoLab() {
+    if (this.abort) { return; }
+    var done = this.async();
+    if (this.useMongoLabAddOn) {
+      this.log(chalk.bold.cyan('Adding MongoLab to app through heroku'));
+      var child = exec('heroku addons:add mongolab', { cwd: 'dist' }, function (err, stdout, stderr) {
+        if (err) { this.log.error(err); }
+        done();
+      }.bind(this));
+      child.stderr.on('data', function (data) {
+        this.log('Failed to start child process.');
+      });
+      child.stdout.on('data', function(data) {
+        this.log(data.toString());
+      }.bind(this));
+    } else {
+      done();
+    }
+  };
+
   DeployGenerator.prototype.gitForcePush = function gitForcePush() {
-    if(this.abort) { return; }
+    if (this.abort) { return; }
     var done = this.async();
 
     this.log(chalk.bold('\nUploading your initial application code.\n This may take '+chalk.cyan('several minutes')+' depending on your connection speed...'));
