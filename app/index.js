@@ -107,40 +107,40 @@
       // Now you can bind to the dependencies installed event
       this.on('dependenciesInstalled', function() {
         this.spawnCommand('grunt', ['compass'], this._gruntFailedCallback)
-          .on('error', this._gruntFailedCallback)
-          .on('exit', this.emit.bind(this, 'gruntCompassComplete')); // generate style.css
+          .on('error', this._gruntFailedCallback);
+          // .on('exit', this.emit.bind(this, 'gruntCompassComplete')); // generate style.css
       });
 
-      this.on('gruntCompassComplete', function() {
-        // this.spawnCommand('git', ['init'])
-        //   .on('exit', this.emit.bind(this, 'gitInitComplete'));
-        this.spawnCommand('hub', ['init'])
-          .on('exit', this.emit.bind(this, 'initComplete'));
-      });
+      // this.on('gruntCompassComplete', function() {
+      //   // this.spawnCommand('git', ['init'])
+      //   //   .on('exit', this.emit.bind(this, 'gitInitComplete'));
+      //   this.spawnCommand('hub', ['init'])
+      //     .on('exit', this.emit.bind(this, 'initComplete'));
+      // });
 
       //  hub init
       // $ hub add . && hub commit -m "initial commit"
       // $ hub create optional_org_name/repo_name -d "description of repo"
       // $ hub push origin master
 
-      this.on('initComplete', function() {
-        this.spawnCommand('hub', ['add', '.'])
-          .on('exit', this.emit.bind(this, 'hubAddComplete'));
-      });
+      // this.on('initComplete', function() {
+      //   this.spawnCommand('hub', ['add', '.'])
+      //     .on('exit', this.emit.bind(this, 'hubAddComplete'));
+      // });
 
-      this.on('hubAddComplete', function() {
-        this.spawnCommand('hub', ['commit', '-m', 'initial commit'])
-          .on('exit', this.emit.bind(this, 'hubCommitComplete'));
-      });
+      // this.on('hubAddComplete', function() {
+      //   this.spawnCommand('hub', ['commit', '-m', 'initial commit'])
+      //     .on('exit', this.emit.bind(this, 'hubCommitComplete'));
+      // });
 
-      this.on('hubCommitComplete', function() {
-        this.spawnCommand('hub', ['create', '-d', 'Fullstack application using MEAN.'])
-          .on('exit', this.emit.bind(this, 'hubCreateComplete'));
-      });
+      // this.on('hubCommitComplete', function() {
+      //   this.spawnCommand('hub', ['create', '-d', 'Fullstack application using MEAN.'])
+      //     .on('exit', this.emit.bind(this, 'hubCreateComplete'));
+      // });
 
-      this.on('hubCreateComplete', function() {
-        this.spawnCommand('hub', ['push', 'origin', 'master']);
-      });
+      // this.on('hubCreateComplete', function() {
+      //   this.spawnCommand('hub', ['push', 'origin', 'master']);
+      // });
       // this.on('gitInitComplete', )
 
       // this.spawnCommand(installer, args, cb)
@@ -155,7 +155,8 @@
       //   }.bind(this));
     },
 
-    _gruntFailedCallback: function() {
+    _gruntFailedCallback: function(err) {
+      if (err) { this.log(chalk.bold(err)); }
       this.log('GRUNT COMPASS TASK FAILED');
     }
 

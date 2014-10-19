@@ -14,7 +14,8 @@
           'bower_components/**/*',
           'assets/images/{,*/}*.{webp}',
           'assets/fonts/**/*',
-          'index.html'
+          'index.html',
+          'README.md'
         ]
       }, {
         expand: true,

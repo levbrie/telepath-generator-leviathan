@@ -1,0 +1,35 @@
+(function () {
+  'use strict';
+  var chalk = require('chalk');
+
+  var deployPrompts = {
+    prompts: [{
+      name: 'repoName',
+      message: 'Please enter the name of the repository you wish to create on Github (defaults to current directory)'
+    }, {
+      type: 'confirm',
+      name: 'makePrivate',
+      message: 'Do you wish to make this a private repo? (y/N)',
+      default: false
+    }, {
+      name: 'herokuAppName',
+      message: 'Name to use for heroku deployment (leave blank for a randomly generated name)'
+    }],
+    prompt: function(generator) {
+      var done = generator.async();
+      var prompts = this.prompts;
+
+      generator.log(chalk.bold.yellow('Deployment Setup:'));
+      generator.prompt(prompts, function(deployResponses) {
+        generator.repoName = generator._.slugify(deployResponses.repoName) || generator._.slugify(generator.appname);
+        generator.makePrivate = deployResponses.makePrivate;
+        generator.herokuAppName = generator._.slugify(deployResponses.herokuAppName);
+
+        done();
+      }.bind(generator));
+    }
+  };
+
+  module.exports = deployPrompts;
+
+})();
