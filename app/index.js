@@ -4,8 +4,7 @@
   var path                    = require('path'),
       yeoman                  = require('yeoman-generator'),
       yosay                   = require('yosay'),
-      // util = require('util'),
-      // chalk = require('chalk'),
+      chalk                   = require('chalk'),
       leviathanLion           = require('../leviathan_say/leviathan-lion'),
       buildPrompts            = require('./prompts/buildPrompts'),
       clientPrompts           = require('./prompts/clientPrompts'),
@@ -25,18 +24,10 @@
       this.log('TOKEN_SECRET: ' + this.tokenSecret);
       this.pkg = require('../package.json');
       this.filters = {};
-
-
-      // this.on('end', function () {
-      //   if (!this.options['skip-install']) {
-      //     this.installDependencies();
-      //   }
-      // });
     },
 
     welcome: function() {
-      // Have Yeoman greet the user.
-      // this.log(yosay('Welcome to the marvelous Leviathan generator!'));
+      // Have Leviathan greet the user.
       this.log(leviathanLion('WELCOME TO THE LEVIATHAN'));
       this.log('This generator creates an an AngularJS app with ' +
                ' an express server and a MongoDB data store.');
@@ -59,11 +50,6 @@
       this.config.forceSave(); // make sure saving is done b4 calling hook
     },
 
-    configuring: function () {
-      // this.copy('editorconfig', '.editorconfig');
-      // this.copy('jshintrc', '.jshintrc');
-    },
-
     writing: function () {
       this.mkdir('server');
       this.mkdir('public');
@@ -75,24 +61,11 @@
 
       this.log('APP NAME:');
       this.log(this.appname);
-      // templates
-      // var context = {
-      //     appname: this.appname
-      // };
       this.log(this.sourceRoot());
       this.log(this.destinationRoot());
       this._processDirectory(this.sourceRoot(), this.destinationRoot());
     },
 
-    // install: function () {
-    //   this.installDependencies({
-    //     skipInstall: this.options['skip-install']
-    //   });
-
-    //   this.on('end', function() {
-    //     this.spawnCommand('grunt', ['compass']);
-    //   });
-    // }
     install: function() {
       this.on('end', function () {
         this.installDependencies({
@@ -108,51 +81,8 @@
       this.on('dependenciesInstalled', function() {
         this.spawnCommand('grunt', ['compass'], this._gruntFailedCallback)
           .on('error', this._gruntFailedCallback);
-          // .on('exit', this.emit.bind(this, 'gruntCompassComplete')); // generate style.css
       });
 
-      // this.on('gruntCompassComplete', function() {
-      //   // this.spawnCommand('git', ['init'])
-      //   //   .on('exit', this.emit.bind(this, 'gitInitComplete'));
-      //   this.spawnCommand('hub', ['init'])
-      //     .on('exit', this.emit.bind(this, 'initComplete'));
-      // });
-
-      //  hub init
-      // $ hub add . && hub commit -m "initial commit"
-      // $ hub create optional_org_name/repo_name -d "description of repo"
-      // $ hub push origin master
-
-      // this.on('initComplete', function() {
-      //   this.spawnCommand('hub', ['add', '.'])
-      //     .on('exit', this.emit.bind(this, 'hubAddComplete'));
-      // });
-
-      // this.on('hubAddComplete', function() {
-      //   this.spawnCommand('hub', ['commit', '-m', 'initial commit'])
-      //     .on('exit', this.emit.bind(this, 'hubCommitComplete'));
-      // });
-
-      // this.on('hubCommitComplete', function() {
-      //   this.spawnCommand('hub', ['create', '-d', 'Fullstack application using MEAN.'])
-      //     .on('exit', this.emit.bind(this, 'hubCreateComplete'));
-      // });
-
-      // this.on('hubCreateComplete', function() {
-      //   this.spawnCommand('hub', ['push', 'origin', 'master']);
-      // });
-      // this.on('gitInitComplete', )
-
-      // this.spawnCommand(installer, args, cb)
-      //   .on('error', cb)
-      //   .on('exit', this.emit.bind(this, installer + 'Install:end', paths))
-      //   .on('exit', function (err) {
-      //     if (err === 127) {
-      //       this.log.error('Could not find ' + installer + '. Please install with ' +
-      //                           '`npm install -g ' + installer + '`.');
-      //     }
-      //     cb(err);
-      //   }.bind(this));
     },
 
     _gruntFailedCallback: function(err) {
