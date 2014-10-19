@@ -5,7 +5,11 @@
   var deployPrompts = {
     prompts: [{
       name: 'repoName',
-      message: 'Please enter the name of the repository you wish to create on Github (defaults to current directory)'
+      message: 'Please enter the name of the repository you wish to ' +
+               'create on Github (defaults to current directory). To ' +
+               'create a repo within an organization you belong to, ' +
+               'simply include create a name in the format ' +
+               'ORGANIZATION_NAME/REPO_NAME.'
     }, {
       type: 'confirm',
       name: 'makePrivate',

@@ -91,8 +91,11 @@
     });
 
     this.on('hubCommitComplete', function() {
-      var args = ['create', '-d', 'Fullstack application using MEAN.'];
+      var argsStr = 'create ' + repoName + ' -d Fullstack MEAN application.';
+      var args = argsStr.split(' ');
       if (this.makePrivate) { args.push('-p'); }
+      this.log(chalk.bold.cyan('invoiking hub with args: '));
+      this.log(chalk.bold.yellow(args));
       this.spawnCommand('hub', args)
         .on('exit', this.emit.bind(this, 'hubCreateComplete'));
     });
