@@ -25,7 +25,7 @@
 
   DeployGenerator.prototype.promptForDeploy = function promptForDeploy() {
     deployPrompts.prompt(this);
-    this.log(chalk.bold('HEROKU APP NAME: ' + this.herokuAppName));
+    // this.log(chalk.bold('HEROKU APP NAME: ' + this.herokuAppName));
   };
 
   DeployGenerator.prototype.verifyHerokuToolbelt = function verifyHerokuToolbelt() {
@@ -79,10 +79,13 @@
     });
 
     this.on('hubCommitComplete', function() {
-      var argsStr = 'create ' + repoName + ' -d Fullstack MEAN application.';
       var args = argsStr.split(' ');
+      var args = ['create'];
+      if (this.repoName) { args.push(this.repoName); }
       if (this.makePrivate) { args.push('-p'); }
-      this.log(chalk.bold.cyan('invoiking hub with args: '));
+      args.push('-d');
+      args.push('Fullstack MEAN application (AngularJS, Node, Express, MongoDB.');
+      this.log(chalk.bold.cyan('invoking hub with args: '));
       this.log(chalk.bold.yellow(args));
       this.spawnCommand('hub', args)
         .on('exit', this.emit.bind(this, 'hubCreateComplete'));
@@ -212,7 +215,7 @@
         done();
       }.bind(this));
       child.stderr.on('data', function (data) {
-        this.log('Failed to start child process.');
+        this.log('Heroku [hopefully standard] reporting errors...  Please continue to wait...');
       });
       child.stdout.on('data', function(data) {
         this.log(data.toString());
@@ -263,8 +266,8 @@
           this.log(chalk.green('\nYou may need to address the issues mentioned above and restart the server for the app to work correctly.'));
         }
 
-        this.log(chalk.yellow('After app modification run\n\t' + chalk.bold('grunt build') +
-        '\nThen deploy with\n\t' + chalk.bold('grunt buildcontrol:heroku')));
+        this.log(chalk.yellow('After app modification run:\n\t' + chalk.bold('grunt build') +
+        '\nThen deploy with:\n\t' + chalk.bold('grunt buildcontrol:heroku')));
       }
       done();
     }.bind(this));

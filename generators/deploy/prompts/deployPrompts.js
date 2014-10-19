@@ -30,7 +30,12 @@
 
       generator.log(chalk.bold.yellow('Deployment Setup:'));
       generator.prompt(prompts, function(deployResponses) {
-        generator.repoName = generator._.slugify(deployResponses.repoName) || generator._.slugify(generator.appname);
+        var repoName = generator._.slugify(generator.appname);
+        var githubRepoNameArr = deployResponses.split('/');
+        if (githubRepoNameArr.length && githubRepoNameArr.length > 1) {
+          repoName = githubRepoNameArr[0] + '/' + generator._.slugify(githubRepoNameArr[1]);
+        }
+        generator.repoName = repoName;
         generator.makePrivate = deployResponses.makePrivate;
         generator.herokuAppName = generator._.slugify(deployResponses.herokuAppName);
         generator.useMongoLabAddOn = deployResponses.useMongoLabAddOn;
