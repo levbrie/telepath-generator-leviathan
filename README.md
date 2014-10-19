@@ -50,3 +50,9 @@ $ git push heroku master
 all of which you can of course do at the command line, provided you have both [hub](https://github.com/github/hub) and the [heroku toolbelt](https://toolbelt.heroku.com/) installed.
 
 [More info on working with node in Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
+
+The deploy generator also uses a plugin called heroku-config to push your local .env file to heroku.  Install it with:
+
+```zsh
+$ heroku plugins:install git://github.com/ddollar/heroku-config.git
+```
