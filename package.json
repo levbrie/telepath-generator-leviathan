@@ -1,6 +1,6 @@
 {
   "name": "generator-leviathan",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Opinionated yeoman generator for creating mean stack applications",
   "license": "MIT",
   "main": "app/index.js",
@@ -57,7 +57,8 @@
     "jshint-stylish": "^1.0.0",
     "mocha": "*",
     "shelljs": "^0.3.0",
-    "time-grunt": "^1.0.0"
+    "time-grunt": "^1.0.0",
+    "grunt-release": "^0.7.0"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
