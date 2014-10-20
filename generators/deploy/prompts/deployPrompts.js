@@ -31,7 +31,7 @@
       generator.log(chalk.bold.yellow('Deployment Setup:'));
       generator.prompt(prompts, function(deployResponses) {
         var repoName = generator._.slugify(generator.appname);
-        var githubRepoNameArr = deployResponses.split('/');
+        var githubRepoNameArr = deployResponses.repoName.split('/');
         if (githubRepoNameArr.length && githubRepoNameArr.length > 1) {
           repoName = githubRepoNameArr[0] + '/' + generator._.slugify(githubRepoNameArr[1]);
         }

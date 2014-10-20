@@ -79,7 +79,6 @@
     });
 
     this.on('hubCommitComplete', function() {
-      var args = argsStr.split(' ');
       var args = ['create'];
       if (this.repoName) { args.push(this.repoName); }
       if (this.makePrivate) { args.push('-p'); }
@@ -273,7 +272,7 @@
     }.bind(this));
 
     child.stderr.on('data', function (data) {
-      console.log('Failed to start child process.');
+      console.log('Heroku [hopefully standard] reporting errors...  Please continue to wait...');
     });
     child.stdout.on('data', function(data) {
       this.log(data.toString());
