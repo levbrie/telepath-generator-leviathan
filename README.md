@@ -64,3 +64,14 @@ Deployment requires that you have a remote mongo database to connect to.  You ca
 ```
 
 or you can [setup a mongolab account] and create one online. If you do this, just make sure to set the MONGOLAB_URI on heroku to the URI for accessing that db.
+
+
+## Versioning and releases
+
+This project uses semantic versioning and github for releases.  Releases can be created automatically using the grunt bump task, which will create a conventional changelog as well as a release.  For more, see:
+
+[grunt-release](https://github.com/geddski/grunt-release)
+[github on creating releases](https://help.github.com/articles/creating-releases/)
+[grunt-conventional-changelog](https://github.com/btford/grunt-conventional-changelog)
+[commit conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit)
+[node-semver](https://github.com/npm/node-semver)
