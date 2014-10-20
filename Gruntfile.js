@@ -6,7 +6,9 @@
       process = require('child_process');
 
   module.exports = function(grunt) {
-    var justInTimeStaticMappings = {};
+    var justInTimeStaticMappings = {
+      changelog: 'grunt-conventional-changelog'
+    };
     require('jit-grunt')(grunt, justInTimeStaticMappings);
     require('time-grunt')(grunt);
 
@@ -28,6 +30,36 @@
             colors: true,
             timeout: 120000
           }
+        }
+      },
+      release: {
+        options: {
+          tagName: 'v<%= version %>',
+          // bump: false, //default: true
+          // file: 'component.json', //default: package.json
+          // add: false, //default: true
+          // commit: false, //default: true
+          // tag: false, //default: true
+          // push: false, //default: true
+          // pushTags: false, //default: true
+          npm: false, //default: true
+          // npmtag: true, //default: no tag
+          // indentation: '\t', //default: '  ' (two spaces)
+          // folder: 'folder/to/publish/to/npm', //default project root
+          // tagName: 'some-tag-<%= version %>', //default: '<%= version %>'
+          // commitMessage: 'check out my release <%= version %>', //default: 'release <%= version %>'
+          // tagMessage: 'tagging version <%= version %>', //default: 'Version <%= version %>',
+          // github: {
+          //   repo: 'geddski/grunt-release', //put your user/repo here
+          //   usernameVar: 'GITHUB_USERNAME', //ENVIRONMENT VARIABLE that contains Github username
+          //   passwordVar: 'GITHUB_PASSWORD' //ENVIRONMENT VARIABLE that contains Github password
+          // }
+        }
+      },
+      changelog: {
+        options: {
+          dest: 'CHANGELOG.md',
+          versionFile: 'package.json'
         }
       }
     };
@@ -84,6 +116,11 @@
         ]);
       }
       grunt.task.run(['jshint', 'mochaTest']);
+    });
+
+    grunt.registerTask('bump', function(target) {
+      var releaseWithTarget = 'release:' + target;
+      grunt.task.run(['changelog', releaseWithTarget]);
     });
 
     grunt.registerTask('default', function() {
