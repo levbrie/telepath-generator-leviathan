@@ -253,6 +253,8 @@ Additional info can be found here:
 **:exclamation: Note:** Make sure you have turned on **Contacts API** and
 **Google+ API** in the *APIs* tab.
 
+**:exclamation: Note:** You must also specify the Product Name on the consent screen for the app in teh developer's console.  If you didn't do so when creating it, or didn't provide the proper callback url, you might have to create a new client id.
+
 <hr>
 
 <img src="http://www.doit.ba/img/facebook.jpg" width="150">
