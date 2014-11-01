@@ -37,6 +37,7 @@
 - [DEVELOPMENT PROCESS](#development-process)
   - [Semantic Versioning](#semantic-versioning)
   - [RELEASING NEW VERSIONS:](#releasing-new-versions)
+  - [TESTING](#testing)
 
 <!-- /MarkdownTOC -->
 
@@ -312,3 +313,9 @@ Releasing new versions consists of:
 8. publish the new version to npm.
 
 use [grunt-release](https://github.com/geddski/grunt-release) to automate these steps
+
+### TESTING
+
+grunt tasks are defined for client-side, server-side, and end-to-end tests.
+
+Server-side tests rely on supertest, mocha, should, and chai. Will most likely use sinon and sinon-chai soon as well.
