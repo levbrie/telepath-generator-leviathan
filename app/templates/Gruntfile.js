@@ -28,7 +28,8 @@ module.exports = function(grunt) {
       jsTest     :   require('./grunt/watch/jsTest'),
       livereload :   require('./grunt/watch/livereload'),
       express    :   require('./grunt/watch/express'),
-      gruntfile  :   { files: ['Gruntfile.js'], tasks: ['reload'] }
+      gruntfile  :   { files: ['Gruntfile.js'], tasks: ['reload'] },
+      mochaTest  :   { files: ['server/**/*.spec.js'], tasks: ['mochaTest'] }
     },
     jshint       : require('./grunt/jshintTask'),
 
@@ -52,7 +53,13 @@ module.exports = function(grunt) {
     // Copies remaining files to places other tasks can use
     copy         : require('./grunt/build/copy'),
     ngAnnotate   : require('./grunt/build/ngAnnotate'),
-    ngtemplates  : require('./grunt/build/ngtemplates')
+    ngtemplates  : require('./grunt/build/ngtemplates'),
+    mochaTest    : {
+      options: {
+        reporter: 'spec'
+      },
+      src: ['server/**/*.spec.js']
+    }
 
   };
   grunt.initConfig(config);
@@ -76,7 +83,19 @@ module.exports = function(grunt) {
     grunt.task.run(['express:dev', 'open', 'watch']);
   });
   grunt.registerTask('inject', ['wiredep', 'injector']);
-  grunt.registerTask('test', ['karma']);
+  grunt.registerTask('test', function (target) {
+    process.env.NODE_ENV = 'test';
+    grunt.log.ok(['NODE_ENV', process.env.NODE_ENV]);
+    if (target === 'server') {
+      return grunt.task.run(['mochaTest']); // need some way to get test db
+    } else if (target === 'client') {
+      return grunt.task.run(['karma']);
+    } else if (target === 'e2e') {
+      return grunt.task.run(['protractor']);
+    } else {
+      grunt.task.run(['test:server', 'test:client']);
+    }
+  });
   grunt.registerTask('reload', function() {
     grunt.task.run(['wiredep', 'injector', 'jshint', 'test']);
   });
