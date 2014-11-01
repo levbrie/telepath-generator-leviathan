@@ -49,7 +49,8 @@
     "bcryptjs": "^2.0.2",
     "moment": "^2.8.2",
     "request": "^2.40.0",
-    "bower": "^1.3.12"
+    "bower": "^1.3.12",
+    "underscore.string": "^2.3.3"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -87,6 +88,9 @@
     "grunt-contrib-copy": "^0.6.0",
     "grunt-ng-annotate": "^0.4.0",
     "grunt-angular-templates": "^0.5.7",
-    "codeclimate-test-reporter": "0.0.4"
+    "codeclimate-test-reporter": "0.0.4",
+    "should": "^4.1.0",
+    "grunt-mocha-test": "^0.12.1",
+    "supertest": "^0.14.0"
   }
 }
