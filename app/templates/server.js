@@ -1,17 +1,23 @@
-var express         = require('express'),
-    dotenv          = require('dotenv');  // call as early as possible to ensure env vars are loaded
+(function () {
+  'use strict';
 
-dotenv.load();
+  var express         = require('express'),
+      dotenv          = require('dotenv');  // call as early as possible to ensure env vars are loaded
 
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-console.log('\n\nENV: ' + env);
-var app = express();
-var config = require('./server/config/config')[env];
+  dotenv.load();
 
-require('./server/config/express')(app, config, env);
-require('./server/config/mongoose')(config);
-require('./server/config/routes')(app);
+  var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+  console.log('\n\nENV: ' + env);
+  var app = express();
+  var config = require('./server/config/config')[env];
 
-app.listen(config.port);
-console.log('Listening on port ' + config.port + '...');
-console.log('DIRNAME: ' + __dirname + '/public');
+  require('./server/config/express')(app, config, env);
+  require('./server/config/mongoose')(config);
+  require('./server/config/routes')(app);
+
+  app.listen(config.port);
+  console.log('Listening on port ' + config.port + '...');
+  console.log('DIRNAME: ' + __dirname + '/public');
+
+  module.exports = app;
+})();
