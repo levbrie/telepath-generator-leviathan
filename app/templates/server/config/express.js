@@ -5,6 +5,7 @@
       session         = require('express-session'),
       ejs             = require('ejs'),
       morgan          = require('morgan'),
+      fs              = require('fs'),
       bodyParser      = require('body-parser'),
       methodOverride  = require('method-override'),
       jwt             = require('jwt-simple'),
