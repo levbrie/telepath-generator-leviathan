@@ -1,11 +1,6 @@
 (function () {
   'use strict';
 
-  // var auth =          require('./auth'),           // for user authentication
-      // users =         require('../controllers/users'),
-      // uploads =       require('../controllers/uploads'),
-      // projects =      require('../controllers/projects'),
-      // mailboxes =     require('../controllers/mailboxes'),
   var mongoose =      require('mongoose'),
       User =          mongoose.model('User'),
       clientViews =   require('./routes/clientViews'),
