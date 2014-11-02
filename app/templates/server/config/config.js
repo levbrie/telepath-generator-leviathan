@@ -14,7 +14,7 @@
     },
     test: {
       rootPath: rootPath,
-      db: 'mongodb://localhost/foundermade-test',
+      db: 'mongodb://localhost/<%= _.slugify(appname) %>-test',
       port: process.env.PORT || 3001,
       morganFormat: 'combined'
     },
