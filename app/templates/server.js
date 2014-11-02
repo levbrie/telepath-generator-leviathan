@@ -4,8 +4,7 @@ var express         = require('express'),
 dotenv.load();
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-console.log('\n\nENV:');
-console.log(env);
+console.log('\n\nENV: ' + env);
 var app = express();
 var config = require('./server/config/config')[env];
 

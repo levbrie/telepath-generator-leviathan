@@ -9,12 +9,20 @@
     development: {
       rootPath: rootPath,
       db: 'mongodb://localhost/<%= _.slugify(appname) %>-dev',
-      port: process.env.PORT || 3000
+      port: process.env.PORT || 3000,
+      morganFormat: 'dev'
+    },
+    test: {
+      rootPath: rootPath,
+      db: 'mongodb://localhost/foundermade-test',
+      port: process.env.PORT || 3001,
+      morganFormat: 'combined'
     },
     production: {
       rootPath: rootPath,
       db: process.env.MONGOLAB_URI,
-      port: process.env.PORT || 80
+      port: process.env.PORT || 80,
+      morganFormat: 'combined'
     }
   };
 }());
