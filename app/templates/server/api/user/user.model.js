@@ -2,11 +2,9 @@
   'use strict';
 
   var mongoose = require('mongoose'),
-//      encrypt  = require('../../auth/encryption'),
       qs       = require('querystring'),
       bcrypt   = require('bcryptjs'),
       jwt      = require('jwt-simple'),
-//      simplReq = require('request'),
       Schema   = mongoose.Schema,
       ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -55,13 +53,14 @@
         }
         done(err, isMatch);
       });
+    },
+    authenticate: function(passwordToMatch) {
+      return this.comparePassword(passwordToMatch, done);
+      // return encrypt.hasPwd(this.salt, passwordToMatch) === this.hashedPassword;
+    },
+    hasRole: function(role) {
+      return this.role === role;
     }
-//    authenticate: function(passwordToMatch) {
-//      return encrypt.hasPwd(this.salt, passwordToMatch) === this.hashedPassword;
-//    },
-//    hasRole: function(role) {
-//      return this.role === role;
-//    }
   };
 
   var User = mongoose.model('User', userSchema);
