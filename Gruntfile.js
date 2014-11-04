@@ -17,7 +17,7 @@
       env          : process.env,
       jshint       : require('./grunt/jshintTask'),
       testApp      : { name: 'testAppName' },
-      mochaTest:   : require('./grunt/mochaTest'),
+      mochaTest    : require('./grunt/mochaTest'),
       release      : require('./grunt/release'),
       changelog    : require('./grunt/changelog')
     };
