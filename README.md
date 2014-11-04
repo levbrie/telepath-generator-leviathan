@@ -68,6 +68,9 @@ or you can [setup a mongolab account] and create one online. If you do this, jus
 
 ## Versioning and releases
 
+Use: ```$ grunt bump:releaseType``` to create new releases with changelogs.
+Release type should be one of patch, minor, major, or prerelease
+
 This project uses semantic versioning and github for releases.  Releases can be created automatically using the grunt bump task, which will create a conventional changelog as well as a release.  For more, see:
 
 [grunt-release](https://github.com/geddski/grunt-release)
