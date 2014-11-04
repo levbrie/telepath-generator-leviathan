@@ -78,7 +78,7 @@
 
     grunt.registerTask('bump', function(target) {
       var releaseWithTarget = 'release:' + target;
-      grunt.task.run(['changelog', releaseWithTarget]);
+      grunt.task.run([releaseWithTarget, 'changelog']);
     });
 
     grunt.registerTask('default', function() {

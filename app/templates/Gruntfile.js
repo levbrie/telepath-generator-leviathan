@@ -59,9 +59,12 @@ module.exports = function(grunt) {
         reporter: 'spec'
       },
       src: ['server/**/*.spec.js']
-    }
-
+    },
+    release      : require('./grunt/release'),
+    changelog    : require('./grunt/changelog')
   };
+
+
   grunt.initConfig(config);
   grunt.registerTask('wait', function() {
     grunt.log.ok('Waiting for server reload...');
@@ -98,6 +101,10 @@ module.exports = function(grunt) {
   });
   grunt.registerTask('reload', function() {
     grunt.task.run(['wiredep', 'injector', 'jshint', 'test']);
+  });
+  grunt.registerTask('bump', function(target) {
+    var releaseWithTarget = 'release:' + target;
+    grunt.task.run([releaseWithTarget, 'changelog']);
   });
   grunt.registerTask('build', [
     'clean:dist',
