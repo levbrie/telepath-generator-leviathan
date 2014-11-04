@@ -6,7 +6,8 @@ module.exports = function(grunt) {
     protractor    : 'grunt-protractor-runner',
     express       : 'grunt-express-server',
     useminPrepare : 'grunt-usemin',
-    ngtemplates   : 'grunt-angular-templates'
+    ngtemplates   : 'grunt-angular-templates',
+    changelog     : 'grunt-conventional-changelog'
   };
   require('jit-grunt')(grunt, justInTimeStaticMappings);    // just-in-time plugin loader (no more loadNpmTasks)
   require('time-grunt')(grunt);
