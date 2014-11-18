@@ -84,6 +84,8 @@ module.exports = function(grunt) {
         'build', 'express:prod', 'open', 'express-keepalive'
       ]);
     }
+    process.env.NODE_ENV = 'development';
+    grunt.log.ok(['NODE_ENV', process.env.NODE_ENV]);
     grunt.task.run(['express:dev', 'open', 'watch']);
   });
   grunt.registerTask('inject', ['wiredep', 'injector']);

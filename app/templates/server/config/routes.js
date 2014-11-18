@@ -7,7 +7,7 @@
       errors =        require('../utilities/errors');  // for view partial routing
 
 
-  module.exports = function(app) {
+  module.exports = function(app, config) { // pass in config object containing rootPath
 
     // see https://github.com/auth0/angular-token-auth/blob/master/auth.server.js
     app.use(function(err, req, res, next){
@@ -44,7 +44,7 @@
 
     app.route('/*')
       .get(function(req, res) {
-        res.sendFile('./public/index.html');
+        res.sendFile(config.rootPath + '/public/index.html');
       });
 
   };
