@@ -6,7 +6,10 @@
       options: {
         sassDir: 'sass',
         cssDir: 'css',
-        basePath: 'public/stylesheets'
+        basePath: 'public/stylesheets',
+        importPath: [
+          'public/app'
+        ]
       }
     }
   };

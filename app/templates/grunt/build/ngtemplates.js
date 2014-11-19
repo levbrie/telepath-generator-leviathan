@@ -10,7 +10,7 @@
           collapseBooleanAttributes: false,
           collapseWhitespace: true,
           removeAttributeQuotes: false,
-          removeEmptyAttributes: false,
+          removeEmptyAttributes: true,
           removeRedundantAttributes: false,
           removeScriptTypeAttributes: false,
           removeStyleLinkTypeAttributes: false

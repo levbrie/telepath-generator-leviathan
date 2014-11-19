@@ -97,8 +97,6 @@
     "grunt-autoprefixer": "^2.0.0",
     "grunt-newer": "^0.8.0",
     "grunt-concurrent": "^1.0.0",
-    "grunt-notify": "^0.4.1",
-    "grunt-attention": "^1.0.0",
     "chalk": "^0.5.1",
     "grunt-svgmin": "^2.0.0",
     "grunt-google-cdn": "^0.4.3",

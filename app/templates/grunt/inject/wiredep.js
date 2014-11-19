@@ -23,6 +23,26 @@
       // fileTypes: {},
       // ignorePath: '',
       // overrides: {}
+    },
+    test: {
+      src: 'karma.conf.js',
+      fileTypes: {
+        js: {
+          block: /(([\s\t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+          detect: {
+            js: /'(.*\.js)'/gi
+          },
+          replace: {
+            js: '\'..{{filePath}}\','
+          }
+        }
+      },
+      ignorePath: /public/,
+      dependencies: true,
+      devDependencies: true,
+      exclude: [ /bootstrap-sass-official/, /bootstrap.js/,
+        /json3/, /es5-shim/, /bootstrap.css/, /font-awesome.css/
+      ]
     }
   };
 }());

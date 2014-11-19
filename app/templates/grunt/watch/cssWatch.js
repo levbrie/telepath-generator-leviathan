@@ -3,6 +3,6 @@
 
   module.exports = {
     files: 'public/**/*.scss',
-    tasks: ['compass']
+    tasks: ['injector:sass', 'compass', 'autoprefixer']
   };
 }());
