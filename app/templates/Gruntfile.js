@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       livereload :   require('./grunt/watch/livereload'),
       express    :   require('./grunt/watch/express'),
       gruntfile  :   { files: ['Gruntfile.js'], tasks: ['reload'] },
-      mochaTest  :   { files: ['server/**/*.spec.js'], tasks: ['mochaTest'] }
+      mochaTest  :   { files: ['server/**/*.spec.js'], tasks: ['test:server'] }
     },
     jshint       : require('./grunt/jshintTask'),
 
