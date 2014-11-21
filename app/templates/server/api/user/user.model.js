@@ -9,6 +9,7 @@
       Schema     = mongoose.Schema,
       ObjectId   = mongoose.Schema.Types.ObjectId;
 
+  var ACCOUNT_STATUSES = 'pending active suspended cancelled deleted'.split(' ');
   var userSchema = mongoose.Schema({
     email           : {
       type:String,
@@ -16,24 +17,31 @@
       lowercase: true,
       unique:true
     },
-    emailVerified:  {type:Boolean, default: false},
-    password:       String,
-    role:           {type:String, required:'{PATH} is required!', default: 'user'},
+    emailVerified   : {type:Boolean, default: false},
+    password        : String,
+    role            : {type:String, required:'{PATH} is required!', default: 'user'},
     accountStatus   : {
       type:String,
       required:'{PATH} is required!',
       enum: ACCOUNT_STATUSES,
       default: 'pending'
     },
-    firstName:      {type:String, required:'{PATH} is required!'},
-    lastName:       {type:String, required:'{PATH} is required!'},
-    profileImageUrl:String,
-    provider:       String,
-    displayName:    String,
-    facebook:       {},
-    github:         {},
-    google:         {},
-    linkedin:       {}
+    firstName       : {type:String, required:'{PATH} is required!'},
+    lastName        : {type:String, required:'{PATH} is required!'},
+    profileImageUrl : String,
+    images          : {
+      profile: {
+        lrg: String,
+        med: String,
+        thumb: String
+      }
+    },
+    provider        : String,
+    displayName     : String,
+    facebook        : {},
+    github          : {},
+    google          : {},
+    linkedin        : {}
   });
 
   userSchema.pre('save', function(next) {
@@ -74,5 +82,5 @@
 
   var User = mongoose.model('User', userSchema);
 
-  exports.User = User;
+  module.exports = User;
 }());
