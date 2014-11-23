@@ -1,3 +1,24 @@
+<a name="1.1.1"></a>
+### 1.1.1 (2014-11-23)
+
+
+#### Bug Fixes
+
+* **Gruntfile:** add grunt-conventional-changelog to just-in-time static mappings for template ap ([c3f7d34d](levbrie/generator-leviathan/commit/c3f7d34dcb3e90bd7d36115b870cabfe226ccdab))
+* **UserDataService.spec:** misspelled jshint comment ([2c79d7f3](levbrie/generator-leviathan/commit/2c79d7f3e9631c25b713aea03662bcf03fa71f12))
+* **changelog:** changelog not automatically committed and pushed during bump ([c4b59535](levbrie/generator-leviathan/commit/c4b595357c6f17fdb6975e9949386f46c640f667))
+* **config:** fix gruntfile to ensure dev server runs with devlopment db ([937cde81](levbrie/generator-leviathan/commit/937cde811fbceddec2d69421a9675ecf11dea3a8))
+
+
+#### Features
+
+* **db:** add custom mongoose plugins for timestamps and paranoidDelete on models ([3f7d7db6](levbrie/generator-leviathan/commit/3f7d7db61008b7328ddf2483ff4220edcf4aeac1))
+* **grunt:** upgrade Gruntfile and tasks ([6c492b3c](levbrie/generator-leviathan/commit/6c492b3cc5140c50afd325e57d4aa5348d0695cb))
+* **releases:** add grunt-conventional-changelog and grunt-release to automate version releases  ([0f81f02d](levbrie/generator-leviathan/commit/0f81f02d5518cb3b979d983225022c54d9b04eb8))
+* **user:** add UserDataService for seeding and searching user ([bd631ded](levbrie/generator-leviathan/commit/bd631dedd8c8978784decd9b40d4f03e3a6ccc84))
+* **user.model:** add timestamps plugin, add accountStatus, require lowercase for email, improve c ([ac20ea15](levbrie/generator-leviathan/commit/ac20ea15efbc7f251f0279baa0205cfcd55be688))
+
+
 <a name="1.0.0"></a>
 ## 1.0.0 (2014-11-04)
 
