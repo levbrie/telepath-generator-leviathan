@@ -8,6 +8,8 @@
     'core.logger',
 
     /* 3rd party modules */
-    'ui.bootstrap', 'satellizer', 'ngDialog', 'toastr'
+    'ui.router', 'ui.bootstrap', 'ui.select', 'ui.utils',
+    'satellizer', 'ngDialog', 'toastr',
+    'angularUtils.directives.dirPagination', 'ngMaterial', 'cfp.hotkeys'
   ]);
 })();
