@@ -34,7 +34,7 @@
         users.length.should.be.greaterThan(3);
       });
 
-      /*jshin -W030 */
+      /*jshint -W030 */
       it('Each user should have a first and last name', function() {
         user.firstName.should.exist;
         user.lastName.should.exist;
