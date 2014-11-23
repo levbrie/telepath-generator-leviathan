@@ -19,8 +19,8 @@
           'public/app/*.js',
           'public/app/components/*.js',
           'public/app/**/*.js',
-         '!{.tmp,public}/{app}/**/*.spec.js',
-         '!{.tmp,public}/{app}/**/*.mock.js'
+         '!{.tmp,public}/app/**/*.spec.js',
+         '!{.tmp,public}/app/**/*.mock.js'
         ]
       }
     },
