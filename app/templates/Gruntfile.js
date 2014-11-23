@@ -119,9 +119,71 @@
     grunt.registerTask('reload', function() {
       grunt.task.run(['wiredep', 'injector', 'newer:jshint', 'test:client']);
     });
-    grunt.registerTask('bump', function(target) {
-      var releaseWithTarget = 'release:' + target;
-      grunt.task.run([releaseWithTarget, 'changelog']);
+    grunt.registerTask('addchangelog', 'create changelog', function() {
+      var nowrite = grunt.option('no-write'),
+          commitMessage = 'chore(CHANGELOG.md): add changelog for new release',
+          done = this.async();
+      Q()
+        .then(addChangelog)
+        .then(commitChangelog)
+        .catch(function(msg) {
+          grunt.fail.warn(msg || 'autorelease failed');
+        })
+        .finally(done);
+
+      function run(cmd, msg){
+        var deferred = Q.defer();
+        grunt.verbose.writeln('Running: ' + cmd);
+
+        if (nowrite) {
+          grunt.log.ok(msg || cmd);
+          deferred.resolve();
+        }
+        else {
+          var success = shell.exec(cmd, {silent:true}).code === 0;
+
+          if (success){
+            grunt.log.ok(msg || cmd);
+            deferred.resolve();
+          }
+          else{
+            // fail and stop execution of further tasks
+            deferred.reject('Failed when executing: `' + cmd + '`\n');
+          }
+        }
+        return deferred.promise;
+      }
+      function addChangelog(){
+        return run('git add CHANGELOG.md', ' staged CHANGELOG.md');
+      }
+      function commitChangelog(){
+        return run('git commit CHANGELOG.md -m "'+ commitMessage +'"', 'committed CHANGELOG.md');
+      }
+    });
+    grunt.registerTask('autorelease', 'create a new release', function(type) {
+      var bumpWithType = 'bump:' + type,
+          releaseWithType = 'release:' + type;
+
+      grunt.task.run(['changelog', 'addchangelog', releaseWithType]);
+    });
+    grunt.registerTask('bump', 'bump repo version', function (type) {
+      var options = this.options({
+        file: grunt.config('pkgFile') || 'package.json'
+      });
+
+      function setup(file, type) {
+        var pkg = grunt.file.readJSON(file);
+        var newVersion = pkg.version = semver.inc(pkg.version, type || 'patch');
+        return {
+          file: file,
+          pkg: pkg,
+          newVersion: newVersion
+        };
+      }
+
+      var config = setup(options.file, type);
+      grunt.file.write(config.file, JSON.stringify(config.pkg, null, '  ') + '\n');
+      grunt.log.ok('Version bumped to ' + config.newVersion);
     });
     grunt.registerTask('build', [
       'clean:dist',

@@ -3,7 +3,8 @@
   module.exports = {
     options: {
       tagName: 'v<%= version %>',
-      // bump: false, //default: true
+      bump: false, // we need to do this ourselves for conventional-changelog
+      file: 'package.json',
       // file: 'component.json', //default: package.json
       // add: false, //default: true
       // commit: false, //default: true

@@ -1,9 +1,13 @@
 (function() {
   'use strict';
-  module.exports = {
-    options: {
-      dest: 'CHANGELOG.md',
-      versionFile: 'package.json'
-    }
+  module.exports = function(grunt) {
+    return {
+      options: {
+        dest: 'CHANGELOG.md',
+        version: require('../../package.json').version,
+        versionFile: require('../../package.json'),
+        repository: '<%= pkg.repository.url %>'
+      }
+    };
   };
 }());
