@@ -68,9 +68,6 @@ or you can [setup a mongolab account] and create one online. If you do this, jus
 
 ## Versioning and releases
 
-Use: ```$ grunt bump:releaseType``` to create new releases with changelogs.
-Release type should be one of patch, minor, major, or prerelease
-
 This project uses semantic versioning and github for releases.  Releases can be created automatically using the grunt bump task, which will create a conventional changelog as well as a release.  For more, see:
 
 [grunt-release](https://github.com/geddski/grunt-release)
@@ -78,3 +75,42 @@ This project uses semantic versioning and github for releases.  Releases can be 
 [grunt-conventional-changelog](https://github.com/btford/grunt-conventional-changelog)
 [commit conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit)
 [node-semver](https://github.com/npm/node-semver)
+
+
+To create new releases with changelogs using the autorelease as it currently stands:
+
+1. ```$ grunt bump:releaseType```
+2. ```$ grunt autorelease:releaseType```
+
+Release type should be one of patch, minor, major, or prerelease
+
+running grunt bump simply bumps the version, which enables conventional changelog to use the correct latest version when generating its changelog.  grunt autorelease then does the following:
+
+1. runs the "changelog" task
+  * Generates changelog from previous version to HEAD...
+  * Parses commits since last version
+  * updates CHANGELOG.md updated
+
+2. runs the "addchangelog" task:
+  * stages CHANGELOG.md
+  * committs CHANGELOG.md
+
+3. runs the "release:patch" (release) task:
+  * stages package.json
+  * commits package.json
+  * creates new git tag: v0.2.8
+  * pushes to remote git repo
+  * pushes new tag 0.2.8 to remote git repo
+
+To then test the production version:
+```$ grunt build```
+```$ grunt serve:prod```
+
+To then commit and push the production version to heroku:
+```$ cd dist```
+```$ git status```
+```$ git add --all```
+
+And normally we include a message like:
+```$ git commit -m "feat(v0.2.3): dist build for v0.2.3"```
+```$ git push heroku master```
