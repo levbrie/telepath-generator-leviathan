@@ -6,7 +6,10 @@
   "main": "app/index.js",
   "homepage": "https://github.com/leviathantech/generator-leviathan",
   "bugs": "https://gihthub.com/leviathantech/generator-leviathan/issues",
-  "repository": "levbrie/generator-leviathan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leviathantech/generator-leviathan"
+  },
   "author": {
     "name": "Lev Brie",
     "email": "lev.brie@gmail.com",
