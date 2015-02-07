@@ -114,3 +114,6 @@ To then commit and push the production version to heroku:
 And normally we include a message like:
 ```$ git commit -m "feat(v0.2.3): dist build for v0.2.3"```
 ```$ git push heroku master```
+
+Inspirations:
+Inspired by https://github.com/DaftMonk/generator-angular-fullstack
